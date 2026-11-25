@@ -1,13 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ShopKart — E-Commerce Practice UI</title>
+  <script>
+    (function () {        
+      try {
+        var saved = localStorage.getItem("shopkart-theme");
+        var prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+        var theme = saved === "dark" || saved === "light" ? saved : (prefersDark ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+      } catch (e) {}
+    })();
+  </script>
   <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
 <body>
+  <!-- Ambient Cursor Blur Light -->
+  <div id="cursorGlow" class="cursor-glow" aria-hidden="true"></div>
+
   <!-- Top Navigation Bar -->
   <header class="navbar">
     <div class="nav-inner">
@@ -20,7 +33,7 @@
         <input
           type="text"
           id="searchInput"
-          placeholder="Search for products, brands and more..."
+          placeholder="Search top brands, series, products..."
           aria-label="Search products"
         />
         <button type="button" id="clearSearchBtn" class="clear-search" aria-label="Clear search" hidden>
@@ -36,6 +49,115 @@
 
       <div class="nav-actions">
         <span class="demo-pill" title="Frontend practice project only">Demo Store</span>
+
+        <button
+          type="button"
+          id="themeToggleBtn"
+          class="theme-toggle"
+          aria-label="Switch to dark mode"
+          aria-pressed="false"
+          title="Toggle Dark / Light Mode"
+        >
+          <span class="theme-icon-wrap" aria-hidden="true">
+            <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+              <circle cx="12" cy="12" r="4"></circle>
+              <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+            </svg>
+            <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </span>
+          <span id="themeLabel" class="theme-label">Dark</span>
+        </button>
+
+        <!-- Auth Controls: Sign In or Profile Menu -->
+        <button type="button" id="signInNavBtn" class="auth-nav-btn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Sign In</span>
+        </button>
+
+        <div id="profileMenuWrap" class="profile-menu-wrap" hidden>
+          <button
+            type="button"
+            id="profileMenuBtn"
+            class="profile-nav-btn"
+            aria-haspopup="menu"
+            aria-expanded="false"
+          >
+            <span id="profileAvatar" class="profile-avatar">U</span>
+            <span id="profileShortName" class="profile-short-name">User</span>
+            <span class="caret" aria-hidden="true">▾</span>
+          </button>
+
+          <div id="profileDropdown" class="profile-dropdown" role="menu" hidden>
+            <div class="dropdown-user-info">
+              <strong id="dropdownUserName">Demo User</strong>
+              <span id="dropdownUserEmail">demo@shopkart.ui</span>
+            </div>
+            <button type="button" id="openProfileBtn" class="dropdown-item" role="menuitem">
+              <span>👤</span>
+              <span>Manage Profile</span>
+            </button>
+            <button type="button" id="dropdownLogoutBtn" class="dropdown-item danger" role="menuitem">
+              <span>🚪</span>
+              <span>Log Out</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="button" id="ordersNavBtn" class="auth-nav-btn" title="View Purchased Items">
+          <span>📦</span>
+          <span>Orders</span>
+          <span id="ordersBadgeCount" class="orders-badge">0</span>
+        </button>
+
+        <!-- Auth Controls: Sign In or Profile Menu -->
+        <button type="button" id="signInNavBtn" class="auth-nav-btn">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span>Sign In</span>
+        </button>
+
+        <div id="profileMenuWrap" class="profile-menu-wrap" hidden>
+          <button
+            type="button"
+            id="profileMenuBtn"
+            class="profile-nav-btn"
+            aria-haspopup="menu"
+            aria-expanded="false"
+          >
+            <span id="profileAvatar" class="profile-avatar">U</span>
+            <span id="profileShortName" class="profile-short-name">User</span>
+            <span class="caret" aria-hidden="true">▾</span>
+          </button>
+
+          <div id="profileDropdown" class="profile-dropdown" role="menu" hidden>
+            <div class="dropdown-user-info">
+              <strong id="dropdownUserName">Demo User</strong>
+              <span id="dropdownUserEmail">demo@shopkart.ui</span>
+            </div>
+            <button type="button" id="openProfileBtn" class="dropdown-item" role="menuitem">
+              <span>👤</span>
+              <span>Manage Profile</span>
+            </button>
+            <button type="button" id="dropdownLogoutBtn" class="dropdown-item danger" role="menuitem">
+              <span>🚪</span>
+              <span>Log Out</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="button" id="ordersNavBtn" class="auth-nav-btn" title="View Purchased Items">
+          <span>📦</span>
+          <span>Orders</span>
+          <span id="ordersBadgeCount" class="orders-badge">0</span>
+        </button>
+
         <button type="button" id="cartBtn" class="cart-btn" aria-label="Open shopping cart">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="9" cy="20" r="1.5"></circle>
@@ -86,32 +208,32 @@
       <div class="hero-track" id="heroTrack">
         <article class="hero-slide slide-blue">
           <div class="hero-content">
-            <span class="hero-badge">PRACTICE SALE DEMO</span>
-            <h1>Big Tech Deals</h1>
-            <p>Up to 50% off on Smartphones, Laptops &amp; Audio Gear</p>
-            <button type="button" class="hero-cta" data-filter="electronics">Explore Electronics</button>
+            <span class="hero-badge">TOP 10 BRANDS SHOWCASE</span>
+            <h1>Flagship Tech &amp; Mobile Series</h1>
+            <p>Apple, Samsung, Google, OnePlus &amp; Sony — Explore 5+ series per category</p>
+            <button type="button" class="hero-cta" data-filter="mobiles">Explore Mobiles</button>
           </div>
-          <div class="hero-art" aria-hidden="true">🎧 💻 📱</div>
+          <div class="hero-art" aria-hidden="true">📱 🎧 💻</div>
         </article>
 
         <article class="hero-slide slide-indigo">
           <div class="hero-content">
-            <span class="hero-badge">SEASONAL PICKS</span>
-            <h1>Fresh Streetwear &amp; Sneakers</h1>
-            <p>Trending styles starting under ₹999 for daily practice UI</p>
+            <span class="hero-badge">ATHLETIC &amp; STREETWEAR</span>
+            <h1>Nike &amp; Adidas Iconic Series</h1>
+            <p>Sneakers, fleece hoodies &amp; oversized streetwear essentials</p>
             <button type="button" class="hero-cta" data-filter="fashion">Shop Fashion</button>
           </div>
-          <div class="hero-art" aria-hidden="true">👟 👕 🕶️</div>
+          <div class="hero-art" aria-hidden="true">👟 🧥 👕</div>
         </article>
 
         <article class="hero-slide slide-teal">
           <div class="hero-content">
-            <span class="hero-badge">HOME UPGRADE</span>
-            <h1>Smart Living Essentials</h1>
-            <p>TVs, lamps &amp; modern decor for your workspace and home</p>
-            <button type="button" class="hero-cta" data-filter="home">Browse Home</button>
+            <span class="hero-badge">HOME &amp; SMART APPLIANCES</span>
+            <h1>LG, Philips, IKEA &amp; Samsung</h1>
+            <p>4K OLED TVs, air purifiers, ergonomic chairs &amp; smart living</p>
+            <button type="button" class="hero-cta" data-filter="appliances">Browse Appliances</button>
           </div>
-          <div class="hero-art" aria-hidden="true">📺 🛋️ 💡</div>
+          <div class="hero-art" aria-hidden="true">📺 🌬️ 🛋️</div>
         </article>
       </div>
 
@@ -125,7 +247,7 @@
     <section class="catalog-card" aria-labelledby="catalogTitle">
       <div class="catalog-header">
         <div>
-          <h2 id="catalogTitle">Best Deals For You</h2>
+          <h2 id="catalogTitle">Top 10 Brands — Best Deals For You</h2>
           <p id="resultSummary" class="result-summary">Showing all products</p>
         </div>
 
@@ -140,12 +262,36 @@
         </div>
       </div>
 
+      <!-- Top 10 Brand Filter Bar -->
+      <div class="brand-bar" aria-label="Filter by Top 10 Brands">
+        <span class="brand-bar-label">Top Brands:</span>
+        <div class="brand-list" id="brandList"></div>
+      </div>
+
       <div id="productGrid" class="product-grid"></div>
 
       <div id="emptyState" class="empty-state" hidden>
         <p class="empty-title">No matching products found</p>
-        <p class="empty-sub">Try clearing your search or switching to All Deals.</p>
+        <p class="empty-sub">Try clearing your search, brand filter, or switching to All Deals.</p>
         <button type="button" id="resetFiltersBtn" class="btn-primary">Reset Filters</button>
+      </div>
+    </section>
+
+    <!-- Purchased Items / Orders Section -->
+    <section id="purchasedSection" class="purchased-section" aria-labelledby="purchasedTitle">
+      <div class="catalog-header">
+        <div>
+          <h2 id="purchasedTitle">Purchased Items (My Orders)</h2>
+          <p id="purchasedSummary" class="result-summary">Items you purchase via Shop Now or Cart Checkout appear here</p>
+        </div>
+        <button type="button" id="clearOrdersBtn" class="btn-outline" hidden>Clear History</button>
+      </div>
+
+      <div id="purchasedGrid" class="purchased-grid"></div>
+
+      <div id="purchasedEmpty" class="empty-state">
+        <p class="empty-title">No purchases yet</p>
+        <p class="empty-sub">Click "Shop Now" or checkout from your Cart on any product to see your purchased items here.</p>
       </div>
     </section>
   </main>
@@ -180,6 +326,153 @@
       <p class="cart-note">Practice demo only — no real payment or account data is collected.</p>
     </div>
   </aside>
+
+  <!-- Instant Shop / Buy Now Modal -->
+  <div id="shopBackdrop" class="modal-backdrop" hidden></div>
+  <section id="shopModal" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="shopModalTitle" hidden>
+    <div class="modal-header">
+      <h2 id="shopModalTitle">Shop Now — Quick Order</h2>
+      <button type="button" id="closeShopBtn" class="icon-btn" aria-label="Close shop modal">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="shop-preview">
+        <div id="shopThumb" class="shop-thumb"></div>
+        <div class="shop-meta">
+          <span id="shopBrand" class="product-brand-pill">Brand</span>
+          <h3 id="shopProductTitle">Product Title</h3>
+          <div class="rating-row">
+            <span id="shopRating" class="rating-pill">4.5 ★</span>
+            <span id="shopCategory" class="rating-count">Category</span>
+          </div>
+          <div class="price-block">
+            <span id="shopPrice" class="price-current">₹0</span>
+            <span id="shopMrp" class="price-mrp">₹0</span>
+            <span id="shopDiscount" class="price-off">0% off</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="shop-qty-row">
+        <span>Quantity</span>
+        <div class="qty-controls">
+          <button type="button" id="shopQtyDec" class="qty-btn" aria-label="Decrease quantity">-</button>
+          <span id="shopQtyVal">1</span>
+          <button type="button" id="shopQtyInc" class="qty-btn" aria-label="Increase quantity">+</button>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <label class="form-field">
+          <span>Recipient Name</span>
+          <input type="text" id="shopDeliveryName" placeholder="Enter your name" />
+        </label>
+        <label class="form-field">
+          <span>Delivery Address</span>
+          <input type="text" id="shopDeliveryAddress" placeholder="City, Street, PIN code" />
+        </label>
+      </div>
+
+      <div class="shop-summary">
+        <div class="price-row savings">
+          <span>You Save</span>
+          <span id="shopTotalSavings">₹0</span>
+        </div>
+        <div class="price-row total">
+          <span>Payable Demo Total</span>
+          <span id="shopTotalAmount">₹0</span>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="shopAddToCartBtn" class="btn-outline">Add to Cart</button>
+        <button type="button" id="shopConfirmOrderBtn" class="btn-accent">Confirm Shop Order</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sign In Modal -->
+  <div id="authBackdrop" class="modal-backdrop" hidden></div>
+  <section id="authModal" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="authModalTitle" hidden>
+    <div class="modal-header">
+      <h2 id="authModalTitle">Sign In to ShopKart</h2>
+      <button type="button" id="closeAuthBtn" class="icon-btn" aria-label="Close sign in modal">✕</button>
+    </div>
+    <form id="authForm" class="modal-body">
+      <p class="modal-sub">Demo account stored locally in your browser so you can manage your profile &amp; track demo orders.</p>
+      <div class="form-grid">
+        <label class="form-field">
+          <span>Full Name *</span>
+          <input type="text" id="authName" placeholder="e.g. Aarav Sharma" required />
+        </label>
+        <label class="form-field">
+          <span>Email Address *</span>
+          <input type="email" id="authEmail" placeholder="e.g. aarav@example.com" required />
+        </label>
+        <label class="form-field">
+          <span>Phone Number</span>
+          <input type="tel" id="authPhone" placeholder="e.g. +91 98765 43210" />
+        </label>
+        <label class="form-field">
+          <span>Default Address</span>
+          <input type="text" id="authAddress" placeholder="e.g. MG Road, Bengaluru 560001" />
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" id="quickDemoSignInBtn" class="btn-outline">Quick Demo Sign In</button>
+        <button type="submit" class="btn-primary">Sign In</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Manage Profile Modal -->
+  <div id="profileBackdrop" class="modal-backdrop" hidden></div>
+  <section id="profileModal" class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="profileModalTitle" hidden>
+    <div class="modal-header">
+      <h2 id="profileModalTitle">Manage Profile</h2>
+      <button type="button" id="closeProfileBtn" class="icon-btn" aria-label="Close profile modal">✕</button>
+    </div>
+    <form id="profileForm" class="modal-body">
+      <div class="profile-stats">
+        <div class="stat-box">
+          <strong id="profileCartCount">0</strong>
+          <span>Items in Cart</span>
+        </div>
+        <div class="stat-box">
+          <strong id="profileOrderCount">0</strong>
+          <span>Demo Orders</span>
+        </div>
+      </div>
+
+      <div class="form-grid">
+        <label class="form-field">
+          <span>Full Name *</span>
+          <input type="text" id="profileNameInput" required />
+        </label>
+        <label class="form-field">
+          <span>Email Address *</span>
+          <input type="email" id="profileEmailInput" required />
+        </label>
+        <label class="form-field">
+          <span>Phone Number</span>
+          <input type="tel" id="profilePhoneInput" />
+        </label>
+        <label class="form-field">
+          <span>Delivery Address</span>
+          <input type="text" id="profileAddressInput" />
+        </label>
+      </div>
+
+      <div class="orders-section">
+        <h3>Recent Demo Orders</h3>
+        <div id="profileOrdersList" class="orders-list"></div>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" id="profileLogoutBtn" class="btn-danger-outline">Log Out</button>
+        <button type="submit" class="btn-primary">Save Profile</button>
+      </div>
+    </form>
+  </section>
 
   <!-- Toast Notification -->
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
