@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </radialGradient>
+    <linearGradient id="fabric" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5f0e6"/>
+      <stop offset="100%" stop-color="#d6cbb8"/>
+    </linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  <rect width="400" height="320" fill="url(#bg)"/>
+  <ellipse cx="200" cy="276" rx="105" ry="15" fill="#0f172a" opacity="0.13"/>
+  <g filter="url(#sh)">
+    <path d="M126 62 Q200 44 274 62 L262 172 L138 172 Z" fill="url(#fabric)"/>
+    <path d="M110 132 L136 132 L144 196 L114 196 Z" fill="#e5dccb"/>
+    <path d="M264 132 L290 132 L286 196 L256 196 Z" fill="#e5dccb"/>
+    <rect x="122" y="168" width="156" height="36" rx="12" fill="url(#fabric)"/>
+    <line x1="138" y1="204" x2="120" y2="270" stroke="#92400e" stroke-width="10" stroke-linecap="round"/>
+    <line x1="262" y1="204" x2="280" y2="270" stroke="#92400e" stroke-width="10" stroke-linecap="round"/>
+    <line x1="154" y1="204" x2="148" y2="254" stroke="#78350f" stroke-width="7" stroke-linecap="round"/>
+    <line x1="246" y1="204" x2="252" y2="254" stroke="#78350f" stroke-width="7" stroke-linecap="round"/>
+  </g>
+</svg>

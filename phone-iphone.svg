@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="65%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </radialGradient>
+    <linearGradient id="ti" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d6d3cd"/>
+      <stop offset="50%" stop-color="#9ca3af"/>
+      <stop offset="100%" stop-color="#6b7280"/>
+    </linearGradient>
+    <linearGradient id="screen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="45%" stop-color="#1d4ed8"/>
+      <stop offset="100%" stop-color="#f97316"/>
+    </linearGradient>
+    <filter id="sh" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#0f172a" flood-opacity="0.22"/>
+    </filter>
+  </defs>
+  <rect width="400" height="320" fill="url(#bg)"/>
+  <ellipse cx="205" cy="274" rx="105" ry="16" fill="#0f172a" opacity="0.12"/>
+  <g filter="url(#sh)">
+    <rect x="195" y="42" width="114" height="220" rx="22" fill="url(#ti)" stroke="#4b5563" stroke-width="2"/>
+    <rect x="206" y="54" width="46" height="48" rx="12" fill="#8f8c86" stroke="#d1d5db" stroke-width="1.5"/>
+    <circle cx="219" cy="68" r="9" fill="#111827" stroke="#6b7280" stroke-width="2"/>
+    <circle cx="219" cy="68" r="4" fill="#1e3a8a"/>
+    <circle cx="219" cy="90" r="9" fill="#111827" stroke="#6b7280" stroke-width="2"/>
+    <circle cx="219" cy="90" r="4" fill="#0f172a"/>
+    <circle cx="239" cy="79" r="9" fill="#111827" stroke="#6b7280" stroke-width="2"/>
+    <circle cx="239" cy="79" r="4" fill="#3b82f6"/>
+    <rect x="92" y="50" width="118" height="224" rx="22" fill="#1f2937" stroke="#9ca3af" stroke-width="3"/>
+    <rect x="99" y="57" width="104" height="210" rx="17" fill="url(#screen)"/>
+    <rect x="133" y="65" width="36" height="10" rx="5" fill="#020617"/>
+    <path d="M99 180 Q150 135 203 165 L203 267 L99 267 Z" fill="#ffffff" opacity="0.1"/>
+  </g>
+</svg>
